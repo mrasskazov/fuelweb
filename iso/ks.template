@@ -106,6 +106,7 @@ bind-utils
 cronie
 crontabs
 curl
+fuelmenu
 man
 mlocate
 ntp

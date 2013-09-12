@@ -106,6 +106,7 @@ bind-utils
 cronie
 crontabs
 curl
+fuelmenu
 man
 mlocate
 ntp
@@ -121,12 +122,8 @@ rubygem-netaddr
 rubygem-openstack
 wget
 yum
-<<<<<<< HEAD
 
 %include /tmp/post_partition.ks
-=======
-fuelmenu
->>>>>>> cleanup dhcp-checker, make fuelmenu optional
 
 # Mount installation media in chroot
 %post --nochroot
@@ -202,6 +199,11 @@ cp -r ${SOURCE}/Packages ${repodir}/centos/fuelweb/x86_64
 cp ${SOURCE}/.treeinfo ${repodir}/centos/fuelweb/x86_64
 cp -r ${SOURCE}/rhel ${repodir}
 
+# Copying Ubuntu files 
+mkdir -p ${repodir}/ubuntu/fuelweb/x86_64/images
+cp -r ${SOURCE}/ubuntu/installer-amd64/current/images/netboot/ubuntu-installer/amd64/linux ${repodir}/ubuntu/fuelweb/images/x86_64
+cp -r ${SOURCE}/ubuntu/installer-amd64/current/images/netboot/ubuntu-installer/amd64/initrd.gz ${repodir}/ubuntu/fuelweb/images/x86_64
+
 # Copying eggs/gems to the nailgun directory
 cp -r ${SOURCE}/eggs ${repodir}
 cp -r ${SOURCE}/gems ${repodir}
@@ -253,17 +255,22 @@ echo "ENABLED=1" > /etc/sysconfig/bootstrap_admin_node
 mkdir -p /etc/nailgun
 cp ${SOURCE}/version.yaml /etc/nailgun/version.yaml
 
+<<<<<<< HEAD
+# Generete Fuel UUID
+uuidgen > /etc/fuel-uuid
+=======
 ###Run fuel menu
-[ -z "$showmenu" ] && showmenu="no"
-cat > /root/.showfuelmenu << EOF
-#Set to yes to run Fuel Setup 
-#Set to no to accept default settings
-showmenu=$showmenu
-EOF
+#Redirect output and input for the app
+exec < /dev/tty6 > /dev/tty6 2> /dev/tty6
+#Switch to a terminal so we can see the app
+chvt 6
+fuelmenu
 
-##Switch back to Anaconda
-#chvt 1
-#exec < /dev/tty1 > /dev/tty1 2> /dev/tty1
+#Switch back to Anaconda
+chvt 1
+exec < /dev/tty1 > /dev/tty1 2> /dev/tty1
+>>>>>>> iso build fixed for fuelmenu,deps for dhcp-checker
+
 
 # Prepare custom /etc/issue logon banner and script for changing IP in it
 cat > /etc/issue << EOF
