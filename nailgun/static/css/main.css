@@ -3672,6 +3672,10 @@ hr.slim {
   cursor: not-allowed;
 }
 
+.cluster-toolbar-item .btn.conflict {
+  color: #ff0000;
+}
+
 .disk-map-full {
   clear: both;
   display: block;
