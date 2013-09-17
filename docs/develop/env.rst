@@ -31,9 +31,10 @@ Setup for Nailgun Unit Tests
 
     sudo apt-get install python-dev python-pip python-psycopg2 python-jinja2
     sudo apt-get install python-paste python-yaml python-sqlalchemy python-kombu
-    sudo apt-get install python-crypto python-simplejson python-webpy python-nose
-    sudo apt-get install python-mock python-decorator python-netaddr python-flake8
-    sudo pip install fysom jsonschema hacking==0.7
+    sudo apt-get install python-crypto python-simplejson python-webpy
+    sudo apt-get install python-nose python-mock python-decorator python-flake8
+    sudo apt-get install python-netaddr python-netifaces
+    sudo pip install fysom jsonschema hacking==0.7 nose-timer
 
 #. Install and configure PostgreSQL database::
 
