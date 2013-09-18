@@ -1,11 +1,5 @@
 #!/bin/bash
 
-###Run fuel menu
-#Redirect output and input for the app
-#exec < /dev/tty6 > /dev/tty6 2> /dev/tty6
-#switch to a terminal so we can see the app
-#chvt 6
-
 function countdown() {
   local i 
   printf %s "$1"
@@ -22,6 +16,8 @@ if [ -f /root/.showfuelmenu ]; then
 fi
 if [[ "$showmenu" == "yes" || "$showmenu" == "YES" ]]; then
   fuelmenu
+  #Reread /etc/sysconfig/network to inform puppet of changes
+  . /etc/sysconfig/network
 else
   #Give user 5 seconds to enter fuelmenu or else continue
   echo

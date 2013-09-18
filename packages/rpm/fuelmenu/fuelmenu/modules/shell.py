@@ -24,7 +24,7 @@ class shell():
   def start_shell(self, args):
     self.parent.mainloop.screen.stop()
     message="Type exit to return to the main UI."
-    subprocess.call("clear ; echo '%s';echo; bash -l" % message, shell=True)
+    subprocess.call("clear ; echo '%s';echo; env  PS1='[\u@\h \W]# ' bash" % message, shell=True)
     self.parent.mainloop.screen.start()
 
   def refresh(self):

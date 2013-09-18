@@ -65,6 +65,7 @@ class FuelSetup():
                                    % (os.path.dirname(__file__))
         self.settingsfile = "%s/newsettings.yaml" \
                             % (os.path.dirname(__file__))
+        self.managediface="eth0"
         self.main()
         self.choices = []
 
