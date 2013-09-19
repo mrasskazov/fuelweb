@@ -8,7 +8,6 @@ import subprocess
 
 blank = urwid.Divider()
 
-
 class shell():
   def __init__(self, parent):
     self.name="Shell Login"
@@ -24,7 +23,8 @@ class shell():
   def start_shell(self, args):
     self.parent.mainloop.screen.stop()
     message="Type exit to return to the main UI."
-    subprocess.call("clear ; echo '%s';echo; env  PS1='[\u@\h \W]# ' bash" % message, shell=True)
+
+    subprocess.call("clear ; echo '%s';echo;bash -i" % message, shell=True)
     self.parent.mainloop.screen.start()
 
   def refresh(self):

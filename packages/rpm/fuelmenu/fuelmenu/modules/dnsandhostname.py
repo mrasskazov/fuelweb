@@ -187,15 +187,16 @@ Releases."
     self.save(responses)
     #Apply hostname
     expr='HOSTNAME=.*'
-    replace.replaceInFile("/etc/sysconfig/network",expr,"HOSTNAME=%s" 
-                          % (responses["HOSTNAME"]))
+    replace.replaceInFile("/etc/sysconfig/network",expr,"HOSTNAME=%s.%s" 
+                          % (responses["HOSTNAME"],responses["DNS_DOMAIN"]))
     #append hostname and ip address to /etc/hosts
     with open("/etc/hosts", "a") as etchosts:
       if self.netsettings[self.parent.managediface]["addr"] != "":
         managediface_ip = self.netsettings[self.parent.managediface]["addr"]
       else: 
         managediface_ip = "127.0.0.1"
-      etchosts.write("%s   %s" % (responses["HOSTNAME"],managediface_ip))
+      etchosts.write("%s   %s.%s" % (managediface_ip, responses["HOSTNAME"],
+                                     responses['DNS_DOMAIN']))
       etchosts.close()
     #Write dnsmasq upstream server 
     with open('/etc/dnsmasq.upstream','w') as f:
