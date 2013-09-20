@@ -23,6 +23,7 @@ from nailgun.api.handlers.cluster import ClusterCollectionHandler
 from nailgun.api.handlers.cluster import ClusterHandler
 from nailgun.api.handlers.disks import NodeDefaultsDisksHandler
 from nailgun.api.handlers.disks import NodeDisksHandler
+from nailgun.api.handlers.disks import NodeVolumesInformationHandler
 
 from nailgun.api.handlers.logs import LogEntryCollectionHandler
 from nailgun.api.handlers.logs import LogPackageHandler
@@ -106,7 +107,7 @@ urls = (
     r'/nodes/(?P<node_id>\d+)/disks/defaults/?$',
     NodeDefaultsDisksHandler.__name__,
     r'/nodes/(?P<node_id>\d+)/volumes/?$',
-    r'NodeVolumesInformationHandler',
+    NodeVolumesInformationHandler.__name__,
     r'/nodes/interfaces/?$',
     NodeCollectionNICsHandler.__name__,
     r'/nodes/interfaces/default_assignment?$',
